@@ -1,22 +1,23 @@
 .office-block {
     display: flex;
     width: 342px;
-    height: 132px;
     border-radius: 8px;
     background-color: #fff;
     position: relative;
+    border: 1px solid #E8F3FC;
+    overflow-y: hidden;
+    transition: height 800ms cubic-bezier(.13,.27,.81,.54);
 }
 
 .office-block__sidebar {
     width: 12px;
     height: 100%;
     border-radius: 8px 0px 0px 8px;
-    background-color: red;
 }
 
 .office-block__info {
-    padding: 17.4px 16px 10.23px 22px;
-    width: 100%;
+    padding: 17.4px 16px 0px 22px;
+    width: calc(100% - 12px);
     color: #484954;
 }
 
@@ -25,13 +26,6 @@
     font-weight: 800;
     font-size: 24px;
     line-height: 29.05px;
-}
-
-.office-block__edit {
-    cursor: pointer;
-    position: absolute;
-    right: 16px;
-    top: 14.33px;
 }
 
 .office-block__info > div:first-of-type {
@@ -57,4 +51,36 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+}
+
+.office-block__edit {
+    cursor: pointer;
+    position: absolute;
+    right: 16px;
+    top: 14.33px;
+}
+
+.office-block__arrow-down, .office-block__arrow-up {
+    cursor: pointer;
+    transition: transform 800ms cubic-bezier(.13,.27,.81,.54);
+}
+
+.office-block__arrow-up {
+    transform: rotate(180deg);
+}
+
+.office-block__details {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12.23px;
+    width: 243px;
+}
+
+.office-block__details > li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
 }
