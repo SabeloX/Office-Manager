@@ -6,7 +6,7 @@
     position: relative;
     border: 1px solid #E8F3FC;
     overflow-y: hidden;
-    transition: height 800ms cubic-bezier(.13,.27,.81,.54);
+    transition: height 500ms cubic-bezier(.13,.27,.81,.54);
 }
 
 .office-block__sidebar {
@@ -62,7 +62,7 @@
 
 .office-block__arrow-down, .office-block__arrow-up {
     cursor: pointer;
-    transition: transform 800ms cubic-bezier(.13,.27,.81,.54);
+    transition: transform 500ms cubic-bezier(.13,.27,.81,.54);
 }
 
 .office-block__arrow-up {
