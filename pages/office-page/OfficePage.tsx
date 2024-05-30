@@ -16,6 +16,7 @@ import { Modal } from '@/components/modal/Modal';
 export const OfficePage = () => {
     const [cookies] = useCookies<'currentOffice', { currentOffice: Office }>(['currentOffice']);
     const [staffResults, setStaffResults] = useState<Staff[]>(cookies.currentOffice.staff);
+    const [open, setOpen] = useState<boolean>(false);
 
     const handleSearch = (results: string) => {
         const filteredStaff = cookies.currentOffice.staff.filter(staffMember => `${staffMember.firstName} ${staffMember.lastName}`.toLowerCase().includes(results));
@@ -28,8 +29,8 @@ export const OfficePage = () => {
             <OfficeBlock office={cookies.currentOffice} />
             <Search onSearch={handleSearch}/>
             <StaffList staffList={staffResults} />
-            <Addbutton />
-            <Modal/>
+            <Addbutton onClick={() => setOpen(true)} />
+            <Modal open={open} onClose={() => setOpen(false)} />
         </div>
     );
 }
