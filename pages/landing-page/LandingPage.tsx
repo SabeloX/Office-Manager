@@ -1,3 +1,4 @@
+import { Addbutton } from "@/components/add-button/AddButton";
 import { OfficeBlock } from "../../components/office-block/OfficeBlock";
 import { Office } from "../../interfaces/office.interface";
 
@@ -21,5 +22,6 @@ export const LandingPage = ({ offices }: Props) => (
                 ))
             }
         </ul>
+        <Addbutton />
     </div>
 );
