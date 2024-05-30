@@ -1,0 +1,17 @@
+.office-page {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+}
+
+.office-page > .office-block {
+    margin-top: 23px;
+}
+
+.office-page > .add-button {
+    position: fixed;
+    bottom: 28px;
+    right: 17px;
+}
