@@ -11,7 +11,8 @@ export const offices: Office[] = [
         },
         name: "Specno",
         totalStaff: 25,
-        color: Colors.COLOR_1
+        color: Colors.COLOR_1,
+        id: "0"
     },
     {
         details: {
@@ -22,7 +23,8 @@ export const offices: Office[] = [
         },
         name: "Specno",
         totalStaff: 25,
-        color: Colors.COLOR_1
+        color: Colors.COLOR_2,
+        id: "1"
     },
     {
         details: {
@@ -33,7 +35,8 @@ export const offices: Office[] = [
         },
         name: "Specno",
         totalStaff: 25,
-        color: Colors.COLOR_1
+        color: Colors.COLOR_3,
+        id: "2"
     },
     {
         details: {
@@ -44,7 +47,8 @@ export const offices: Office[] = [
         },
         name: "Specno",
         totalStaff: 25,
-        color: Colors.COLOR_1
+        color: Colors.COLOR_4,
+        id: "3"
     },
     {
         details: {
@@ -55,7 +59,8 @@ export const offices: Office[] = [
         },
         name: "Specno",
         totalStaff: 25,
-        color: Colors.COLOR_1
+        color: Colors.COLOR_5,
+        id: "4"
     },
     {
         details: {
@@ -66,6 +71,7 @@ export const offices: Office[] = [
         },
         name: "Specno",
         totalStaff: 25,
-        color: Colors.COLOR_1
+        color: Colors.COLOR_6,
+        id: "5"
     }
 ]

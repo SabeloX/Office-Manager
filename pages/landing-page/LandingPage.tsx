@@ -13,8 +13,8 @@ export const LandingPage = ({ offices }: Props) => (
         <h2>All Offices</h2>
         <ul>
             {
-                offices.map((office, index) => (
-                    <li key={index}>
+                offices.map((office) => (
+                    <li key={office.id + office.name}>
                         <OfficeBlock
                             office={office}
                         />
