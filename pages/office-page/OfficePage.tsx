@@ -11,6 +11,7 @@ import { Search } from '@/components/search/Search';
 import { StaffList } from '@/components/staff-list/StaffList';
 import { Addbutton } from '@/components/add-button/AddButton';
 import { useState } from 'react';
+import { Modal } from '@/components/modal/Modal';
 
 export const OfficePage = () => {
     const [cookies] = useCookies<'currentOffice', { currentOffice: Office }>(['currentOffice']);
@@ -28,6 +29,7 @@ export const OfficePage = () => {
             <Search onSearch={handleSearch}/>
             <StaffList staffList={staffResults} />
             <Addbutton />
+            <Modal/>
         </div>
     );
 }
