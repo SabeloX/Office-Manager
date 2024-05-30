@@ -28,13 +28,13 @@ export const offices: Office[] = [
                 avatar: Avatar.AVATAR_2
             },
             {
-                id: "0",
+                id: "2",
                 firstName: "Daniel",
                 lastName: "Novitzkas",
                 avatar: Avatar.AVATAR_3
             },
             {
-                id: "0",
+                id: "3",
                 firstName: "Brandon",
                 lastName: "Watkins",
                 avatar: Avatar.AVATAR_4
