@@ -9,5 +9,15 @@ interface Props extends PropsWithChildren {
 }
 
 export const Button = ({ children, onClick, text, filled = true }: Props) => (
-    <button className={`button ${filled ? 'button--filled' : ''} ${text ? 'button--text' : ''}`} onClick={onClick}>{ children }</button>
+    <button
+        type="button"
+        className={
+            `button
+            ${filled ? 'button--filled' : ''}
+            ${text ? 'button--text' : ''}`
+        }
+        onClick={onClick}
+    >
+        { children }
+    </button>
 );

@@ -15,11 +15,13 @@ import { Modal } from '@/components/modal/Modal';
 import { CloseIcon } from '@/icons/CloseIcon';
 import { InputField } from '@/components/input-field/InputField';
 import { Button } from '@/components/button/Button';
+import { Steps } from '@/components/steps/Steps';
 
 export const OfficePage = () => {
     const [cookies] = useCookies<'currentOffice', { currentOffice: Office }>(['currentOffice']);
     const [staffResults, setStaffResults] = useState<Staff[]>(cookies.currentOffice.staff);
     const [open, setOpen] = useState<boolean>(false);
+    const [step, setStep] = useState<number>(0);
 
     const handleSearch = (results: string) => {
         const filteredStaff = cookies.currentOffice.staff.filter(staffMember => `${staffMember.firstName} ${staffMember.lastName}`.toLowerCase().includes(results));
@@ -36,12 +38,13 @@ export const OfficePage = () => {
             <Modal open={open} onClose={() => setOpen(false)}>
                 <div>
                     <h3>New Staff Member</h3>
-                    <CloseIcon />
+                    <CloseIcon onClick={() => setOpen(false)} />
                 </div>
                 <form>
                     <InputField placeholder='First name'/>
                     <InputField placeholder='Last name'/>
-                    <Button/>
+                    <Steps numberOfSteps={2} activeStep={step} />
+                    <Button onClick={() => {}}>Next</Button>
                 </form>
             </Modal>
         </div>
