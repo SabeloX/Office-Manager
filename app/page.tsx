@@ -18,7 +18,7 @@ const Home = () => {
   }, []);
 
   return (
-    <LandingPage offices={cookies.offices ?? []}/>
+    <LandingPage offices={cookies.offices ?? []} />
   );
 }
 

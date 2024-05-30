@@ -14,3 +14,9 @@
     flex-direction: column;
     gap: 24px;
 }
+
+.office > .add-button {
+    position: fixed;
+    bottom: 24px;
+    right: 17px;
+}
