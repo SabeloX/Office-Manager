@@ -32,6 +32,10 @@
     font-size: 24px;
 }
 
+.office-page > .modal > .modal__panel > div > svg {
+    cursor: pointer;
+}
+
 .office-page > .modal > .modal__panel > form {
     display: flex;
     flex-direction: column;
