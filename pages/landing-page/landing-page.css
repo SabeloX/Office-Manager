@@ -1,0 +1,22 @@
+.office {
+    margin-top: 64px;
+    padding: 16px;
+    color: #484954;
+}
+
+.office > h2 {
+    margin-bottom: 28px;
+}
+
+.office > ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.office > .add-button {
+    position: fixed;
+    bottom: 24px;
+    right: 17px;
+}

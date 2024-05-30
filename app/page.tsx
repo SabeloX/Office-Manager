@@ -1,12 +1,29 @@
 'use client'
-import { OfficeBlock } from "@/components/office-block/OfficeBlock";
-import { Colors } from "@/interfaces/colors.interface";
+
+import { Office } from "@/interfaces";
+import { offices as officesData } from '../data/offices';
+
+import { useEffect, useState } from "react";
+import { LandingPage } from "@/pages/landing-page/LandingPage";
+import { useCookies } from "react-cookie";
+import { AppProvider } from "@/components/app-provider/AppProvider";
 
 const Home = () => {
+  const [officesList, setOfficesList] = useState<Office[]>([]);
+  const [cookies, setCookies] = useCookies<'offices', { offices: Office[] }>(['offices']);
+
+  useEffect(() => {
+    if(!cookies.offices){
+      setCookies('offices', officesData);
+    }
+    else{
+      setOfficesList(cookies.offices);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cookies.offices]);
+
   return (
-    <div>
-      <OfficeBlock name="Specno" totalStaff={12} details={{ color: Colors.COLOR_1, capacity: 25, email:"info@specno.com", contactNumber:"082 364 9864", address: "10 Willie Van Schoor Dr, Bo Oakdale, Cape Town, 7530"}} />
-    </div>
+    <LandingPage offices={officesList} />
   );
 }
 

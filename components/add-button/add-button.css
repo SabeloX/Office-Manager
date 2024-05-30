@@ -1,0 +1,15 @@
+.add-button {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0D4477;
+    cursor: pointer;
+    transition: background-color 200ms ease-in;
+}
+
+.add-button:active {
+    background-color: #3e648a;
+}

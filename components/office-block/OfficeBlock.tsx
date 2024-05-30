@@ -9,14 +9,13 @@ import { EmailIcon } from "@/icons/EmailIcon";
 import { CapacityIcon } from "@/icons/CapacityIcon";
 import { AddressIcon } from "@/icons/AddressIcon";
 import { useState } from "react";
+import { Office } from "@/interfaces/office.interface";
 
 interface Props {
-    name: string;
-    totalStaff: number;
-    details: OfficeDetails;
+    office: Office;
 }
 
-export const OfficeBlock = ({ name, totalStaff, details }: Props) => {
+export const OfficeBlock = ({ office }: Props) => {
     const [viewMore, setViewMore] = useState<boolean>(false);
 
     return (
@@ -29,21 +28,21 @@ export const OfficeBlock = ({ name, totalStaff, details }: Props) => {
             <span 
                 className="office-block__sidebar"
                 style={{
-                    backgroundColor: details.color
+                    backgroundColor: office.color
                 }}
             ></span>
             <div className="office-block__info">
-                <h3>{ name }</h3>
+                <h3>{ office.name }</h3>
                 <EditIcon className="office-block__edit" />
                 <div>
                     <StaffIcon />
-                    <p><span>{ totalStaff }</span> Staff Members in Office</p>
+                    <p><span>{ office.totalStaff }</span> Staff Members in Office</p>
                 </div>
                 <div onClick={() => setViewMore(viewMore => !viewMore)}>
                     <p>More</p>
                     <ArrowDown className={`office-block__arrow-${viewMore ? 'up' : 'down'}`} />
                 </div>
-                <OfficeBlockDetails details={details} />
+                <OfficeBlockDetails details={office.details} />
             </div>
         </div>
     );
