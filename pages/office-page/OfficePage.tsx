@@ -6,7 +6,7 @@ import './office-page.css';
 
 import { OfficeBlock } from '@/components/office-block/OfficeBlock';
 import { useCookies } from 'react-cookie';
-import { Office, Staff } from '@/interfaces';
+import { Avatar, Office, Staff } from '@/interfaces';
 import { Search } from '@/components/search/Search';
 import { StaffList } from '@/components/staff-list/StaffList';
 import { Addbutton } from '@/components/add-button/AddButton';
@@ -16,6 +16,8 @@ import { CloseIcon } from '@/icons/CloseIcon';
 import { InputField } from '@/components/input-field/InputField';
 import { Button } from '@/components/button/Button';
 import { Steps } from '@/components/steps/Steps';
+import { avatars } from '@/data/avatars';
+import Image from 'next/image';
 
 export const OfficePage = () => {
     const [cookies] = useCookies<'currentOffice', { currentOffice: Office }>(['currentOffice']);
@@ -29,13 +31,17 @@ export const OfficePage = () => {
         setStaffResults(filteredStaff);
     }
 
+    const handleAddStaffMember = (avatar: Avatar) => {
+
+    }
+
     const Steps = (): ReactNode => {
         switch(step){
             default:
             case 0:
                 return <StepOne step={step} setStep={setStep} />;
             case 1:
-                return <StepTwo />;
+                return <StepTwo step={step} addStaffMember={(avatar) => handleAddStaffMember(avatar)} />;
         }
     }
 
@@ -78,7 +84,6 @@ const StepOne = ({ step, setStep }: StepOneProps) => {
     }
 
     return (
-    <>
         <form>
             <div>
                 <InputField 
@@ -91,17 +96,53 @@ const StepOne = ({ step, setStep }: StepOneProps) => {
                     value={lastName}
                     onChange={(value) => setLastName(value)}
                 />
-                <small>{ validationError && 'Enter both fields to proceed.' }</small>
+                { validationError && <small>Enter both fields to proceed.</small>}
             </div>
             <Steps numberOfSteps={2} activeStep={step} />
             <Button onClick={handleNextStep}>Next</Button>
         </form>
-    </>
     );
 }
 
-const StepTwo = () => {
+interface StepTwoProps {
+    step: number;
+    addStaffMember: (avatar: Avatar) => void;
+}
+
+const StepTwo = ({ step, addStaffMember }: StepTwoProps) => {
+    const [selectedAvatar, setAvatar] = useState<Avatar>();
+    const [validationError, setValidationError] = useState<boolean>(false);
+
+    const handleAddAvatar = () => {
+        if(selectedAvatar){
+            addStaffMember(selectedAvatar);
+        }
+        else{
+            setValidationError(true);
+        }
+    }
+
     return (
-        <></>
+        <div className="office-page__choose-avatar">
+            <h3>Avatar</h3>
+            {validationError && <small>Choose an avatar.</small>}
+            <div className="office-page__avatars">
+                {
+                    avatars.map((avatar, index) => (
+                        <Image
+                            width={52}
+                            height={52}
+                            alt={`avatar ${index}`} src={avatar} key={avatar}
+                            onClick={() => setAvatar(avatar)}
+                            style={{
+                                border: selectedAvatar === avatar ? '4px solid #475569' : 'none'
+                            }}
+                        />
+                    ))
+                }
+            </div>
+            <Steps numberOfSteps={2} activeStep={step} />
+            <Button onClick={handleAddAvatar}>update staff member</Button>
+        </div>
     );
 }

@@ -18,6 +18,6 @@ export const Button = ({ children, onClick, text, filled = true }: Props) => (
         }
         onClick={onClick}
     >
-        { children }
+        { children?.toString().toUpperCase() }
     </button>
 );
