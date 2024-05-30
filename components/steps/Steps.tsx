@@ -1,3 +1,5 @@
+import './steps.css';
+
 interface Props {
     numberOfSteps: number;
     activeStep: number;

@@ -1,0 +1,13 @@
+.steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+}
+
+.steps > span {
+    width: 5.5px;
+    height: 5.5px;
+    border-radius: 50%;
+    border: 1.5px solid #489DDA;
+}
