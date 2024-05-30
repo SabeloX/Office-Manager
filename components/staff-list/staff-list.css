@@ -1,0 +1,37 @@
+.staff-list > div:last-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.staff-list > div:first-of-type > h3 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29.05px;
+}
+
+.staff-list > div:first-of-type > p {
+    font-size: 18px;
+    line-height: 24px;
+    margin-right: 12px;
+}
+
+.staff-list > div:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.staff-list > div:last-of-type > div {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+}
+
+.staff-list > div:last-of-type > div > svg:last-child {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+}

@@ -10,6 +10,8 @@ import { CapacityIcon } from "@/icons/CapacityIcon";
 import { AddressIcon } from "@/icons/AddressIcon";
 import { useState } from "react";
 import { Office } from "@/interfaces/office.interface";
+import { useRouter } from "next/navigation";
+import { useCookies } from "react-cookie";
 
 interface Props {
     office: Office;
@@ -17,6 +19,14 @@ interface Props {
 
 export const OfficeBlock = ({ office }: Props) => {
     const [viewMore, setViewMore] = useState<boolean>(false);
+    const [_, setCookies] = useCookies<'currentOffice', { currentOffice: Office }>(['currentOffice']);
+
+    const { push } = useRouter();
+
+    const handleNavigate = () => {
+        setCookies('currentOffice', office)
+        push('/office');
+    }
 
     return (
         <div
@@ -32,7 +42,7 @@ export const OfficeBlock = ({ office }: Props) => {
                 }}
             ></span>
             <div className="office-block__info">
-                <h3>{ office.name }</h3>
+                <h3 onClick={handleNavigate}>{ office.name }</h3>
                 <EditIcon className="office-block__edit" />
                 <div>
                     <StaffIcon />
