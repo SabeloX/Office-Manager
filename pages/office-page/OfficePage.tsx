@@ -13,6 +13,7 @@ import { Addbutton } from '@/components/add-button/AddButton';
 import { useState } from 'react';
 import { Modal } from '@/components/modal/Modal';
 import { CloseIcon } from '@/icons/CloseIcon';
+import { InputField } from '@/components/input-field/InputField';
 
 export const OfficePage = () => {
     const [cookies] = useCookies<'currentOffice', { currentOffice: Office }>(['currentOffice']);
@@ -37,7 +38,7 @@ export const OfficePage = () => {
                     <CloseIcon />
                 </div>
                 <form>
-                    
+                    <InputField placeholder='First name'/>
                 </form>
             </Modal>
         </div>
