@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { Modal } from '@/components/modal/Modal';
 import { CloseIcon } from '@/icons/CloseIcon';
 import { InputField } from '@/components/input-field/InputField';
+import { Button } from '@/components/button/Button';
 
 export const OfficePage = () => {
     const [cookies] = useCookies<'currentOffice', { currentOffice: Office }>(['currentOffice']);
@@ -40,6 +41,7 @@ export const OfficePage = () => {
                 <form>
                     <InputField placeholder='First name'/>
                     <InputField placeholder='Last name'/>
+                    <Button/>
                 </form>
             </Modal>
         </div>
