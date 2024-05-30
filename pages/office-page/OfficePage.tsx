@@ -39,6 +39,7 @@ export const OfficePage = () => {
                 </div>
                 <form>
                     <InputField placeholder='First name'/>
+                    <InputField placeholder='Last name'/>
                 </form>
             </Modal>
         </div>
