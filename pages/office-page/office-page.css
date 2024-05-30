@@ -39,9 +39,15 @@
 .office-page > .modal > .modal__panel > form {
     display: flex;
     flex-direction: column;
+    gap: 28px;
+}
+
+.office-page > .modal > .modal__panel > form > div:first-of-type {
+    display: flex;
+    flex-direction: column;
     gap: 12px;
 }
 
-.office-page > .modal > .modal__panel > form > .steps {
-    margin: 16px 0;
+small {
+    color: red;
 }
