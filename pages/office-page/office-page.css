@@ -15,3 +15,13 @@
     bottom: 28px;
     right: 17px;
 }
+
+.office-page > .modal > .modal__panel {
+    padding: 24px 16px;
+}
+
+.office-page > .modal > .modal__panel > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
