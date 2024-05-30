@@ -1,9 +1,14 @@
 import { SearchIcon } from '@/icons/SearchIcon';
 import './search.css';
+import { ChangeEvent, useState } from 'react';
 
-export const Search = () => (
+interface Props {
+    onSearch: (value: string) => void;
+}
+
+export const Search = ({ onSearch }: Props) => (
     <div className="search">
-        <input placeholder="Search" />
+        <input onChange={(event: ChangeEvent<HTMLInputElement>) => onSearch(event.target.value.toLowerCase())} placeholder="Search" />
         <SearchIcon />
     </div>
 );
