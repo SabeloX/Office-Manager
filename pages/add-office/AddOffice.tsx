@@ -37,7 +37,7 @@ export const AddOffice = ({ currentOffice, edit }: Props) => {
 
     const [validationError, setValidationError] = useState<boolean>(false);
 
-    const { addNewOffice, offices, editOffice } = useAppOffices();
+    const { addNewOffice, offices, editOffice, setCurrentOffice } = useAppOffices();
 
     const { push } = useRouter();
 
@@ -53,7 +53,7 @@ export const AddOffice = ({ currentOffice, edit }: Props) => {
             setValidationError(false);
             
             if(edit && currentOffice){
-                editOffice({
+                const newOffice = {
                     id: currentOffice.id,
                     staff: currentOffice.staff,
                     totalStaff: currentOffice.totalStaff,
@@ -65,10 +65,12 @@ export const AddOffice = ({ currentOffice, edit }: Props) => {
                         email: emailAddress,
                         capacity: maxCapacity
                     }
-                })
+                };
+                editOffice(newOffice);
+                setCurrentOffice(newOffice);
             }
             else{
-                addNewOffice({
+                const newOffice = {
                     id: `${offices.length + 1}`,
                     staff: [],
                     totalStaff: 0,
@@ -80,9 +82,11 @@ export const AddOffice = ({ currentOffice, edit }: Props) => {
                         email: emailAddress,
                         capacity: maxCapacity
                     }
-                });
+                };
+                addNewOffice(newOffice);
+                setCurrentOffice(newOffice);
             }
-            push('/');
+            push('/office');
         }
         else{
             setValidationError(true);
