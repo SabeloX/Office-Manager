@@ -1,12 +1,13 @@
 import { Addbutton } from "@/components/add-button/AddButton";
 import { OfficeBlock } from "../../components/office-block/OfficeBlock";
-import { Office } from "../../interfaces/office.interface";
 
 import './landing-page.css';
 import { useAppOffices } from "@/context/Office.context";
+import { useRouter } from "next/navigation";
 
 export const LandingPage = () => {
     const { offices } = useAppOffices();
+    const { push } = useRouter();
 
     return(
         <div className="office">
@@ -22,7 +23,7 @@ export const LandingPage = () => {
                     ))
                 }
             </ul>
-            <Addbutton />
+            <Addbutton onClick={() => push('/add-office')} />
         </div>
     );
 }

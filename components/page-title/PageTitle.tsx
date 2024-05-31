@@ -1,3 +1,5 @@
+'use client';
+
 import { ArrowLeftIcon } from "@/icons/ArrowLeftIcon";
 
 import './page-title.css';

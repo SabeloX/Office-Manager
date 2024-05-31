@@ -1,0 +1,33 @@
+.add-office {
+    padding: 16px;
+}
+
+.add-office  > .page-title {
+    margin-bottom: 45px;
+}
+
+.add-office__info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 36px;
+}
+
+.add-office__choose-color {
+    margin-bottom: 36px;
+}
+
+.add-office__choose-color > h3 {
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.add-office > div:last-of-type {
+    display: flex;
+    justify-content: center;
+}
+
+.add-office > div:last-of-type > button {
+    width: 232px !important;
+}
