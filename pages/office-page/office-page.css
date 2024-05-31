@@ -6,43 +6,47 @@
     position: relative;
 }
 
-.office-page > .office-block {
+.office-page .office-block {
     margin-top: 23px;
 }
 
-.office-page > .add-button {
+.office-page .add-button {
     position: fixed;
     bottom: 28px;
     right: 17px;
 }
 
-.office-page > .modal > .modal__panel > div:first-of-type {
+.office-page .modal > .modal__panel {
+    padding: 24px 16px;
+}
+
+.office-page .modal > .modal__panel > div:first-of-type {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 28px;
 }
 
-.office-page > .modal > .modal__panel > h3 {
+.office-page .modal > .modal__panel > h3 {
     margin-bottom: 24px;
 }
 
-.office-page > .modal > .modal__panel > div:first-of-type > h3 {
+.office-page .modal > .modal__panel > div:first-of-type > h3 {
     font-weight: 800;
     font-size: 24px;
 }
 
-.office-page > .modal > .modal__panel > div > svg {
+.office-page .modal > .modal__panel > div > svg {
     cursor: pointer;
 }
 
-.office-page > .modal > .modal__panel > form {
+.office-page .modal > .modal__panel > form {
     display: flex;
     flex-direction: column;
     gap: 28px;
 }
 
-.office-page > .modal > .modal__panel > form > div:first-of-type {
+.office-page .modal > .modal__panel > form > div:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -72,4 +76,39 @@ small {
 
 .office-page__choose-avatar > .steps {
     margin: 4px 0;
+}
+
+.office-page .search {
+    margin: 24px 0;
+}
+
+@media (min-width: 768px) {
+    .office-page {
+        max-width: 1390px;
+        padding: 36px;
+    }
+
+    .office-block {
+        margin-top: 0 !important;
+        flex: 1;
+    }
+
+    .office-page > .page-title > p {
+        text-align: left;
+        margin-left: 16px;
+    }
+
+    .office-page .search {
+        margin-top: 0;
+    }
+
+    .office-page > div:nth-of-type(2) {
+        display: flex;
+        justify-content: space-between;
+        gap: 36px;
+    }
+
+    .office-page > div:nth-of-type(2) > div:nth-of-type(2) {
+        flex: 1;
+    }
 }

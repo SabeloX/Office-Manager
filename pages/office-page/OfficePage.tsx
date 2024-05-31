@@ -33,11 +33,15 @@ export const OfficePage = () => {
     return (
         <div className="office-page">
             <PageTitle backLink="/" title='Office' />
-            {currentOffice && <OfficeBlock office={currentOffice} />}
-            <Search onSearch={handleSearch} />
-            {staffResults && <StaffList setStaffList={setStaffResults} staffList={staffResults} />}
-            <Addbutton onClick={() => setOpen(true)} />
-            <StaffInfoModal open={open} onClose={() => setOpen(false)} setStaffResults={setStaffResults} />
+            <div>
+                {currentOffice && <OfficeBlock office={currentOffice} />}
+                <div>
+                    <Search onSearch={handleSearch} />
+                    {staffResults && <StaffList setStaffList={setStaffResults} staffList={staffResults} />}
+                </div>
+                <Addbutton onClick={() => setOpen(true)} />
+                <StaffInfoModal open={open} onClose={() => setOpen(false)} setStaffResults={setStaffResults} />
+            </div>
         </div>
     );
 }

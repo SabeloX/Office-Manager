@@ -25,3 +25,9 @@
     opacity: 1;
     z-index: 10;
 }
+
+@media (min-width: 768px){
+    .modal__panel {
+        max-width: 400px;
+    }
+}
