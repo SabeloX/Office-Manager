@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { Colors, Office } from '@/interfaces';
 import { useAppOffices } from '@/context/Office.context';
 import { useRouter } from 'next/navigation';
+import { DeleteModal } from '@/components/delete-modal/DeleteModal';
 
 interface Props {
     currentOffice?: Office;
@@ -37,7 +38,9 @@ export const AddOffice = ({ currentOffice, edit }: Props) => {
 
     const [validationError, setValidationError] = useState<boolean>(false);
 
-    const { addNewOffice, offices, editOffice, setCurrentOffice } = useAppOffices();
+    const { addNewOffice, offices, editOffice, setCurrentOffice, deleteOffice } = useAppOffices();
+
+    const [openDeleteOffice, setOpenDeleteOffice] = useState<boolean>(false);
 
     const { push } = useRouter();
 
@@ -93,7 +96,14 @@ export const AddOffice = ({ currentOffice, edit }: Props) => {
         }
     }
 
+    const handleDeleteOffice = () => {
+        deleteOffice(currentOffice?.id as string);
+        setOpenDeleteOffice(false);
+        push('/');
+    }
+
     return (
+        <>
         <div className="add-office">
             <PageTitle title="New Office" />
             <div className="add-office__info">
@@ -110,8 +120,10 @@ export const AddOffice = ({ currentOffice, edit }: Props) => {
             </div>
             <div>
                 <Button onClick={handleAddOffice}>{edit ? 'Update Office' : 'Add Office'}</Button>
-                {edit && <Button text>Delete Office</Button>}
+                {edit && <Button text onClick={() => setOpenDeleteOffice(true)}>Delete Office</Button>}
             </div>
         </div>
+        <DeleteModal onDelete={handleDeleteOffice} open={openDeleteOffice} onClose={() => setOpenDeleteOffice(false)}/>
+        </>
     )
 }
