@@ -19,6 +19,7 @@ import { avatars } from '@/data/avatars';
 import Image from 'next/image';
 
 import { useAppOffices } from '@/context/Office.context';
+import { ArrowLeftIcon } from '@/icons';
 
 export const OfficePage = () => {
     const { setCurrentOffice, currentOffice } = useAppOffices();
@@ -96,6 +97,7 @@ export const OfficePage = () => {
             <Addbutton onClick={() => setOpen(true)} />
             <Modal open={open} onClose={() => setOpen(false)}>
                 <div>
+                    {step === 1 && <ArrowLeftIcon onClick={() => setStep(0)} />}
                     <h3>New Staff Member</h3>
                     <CloseIcon onClick={() => setOpen(false)} />
                 </div>

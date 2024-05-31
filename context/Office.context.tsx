@@ -1,5 +1,5 @@
 import { offices } from "@/data/offices";
-import { Office } from "@/interfaces";
+import { Office, Staff } from "@/interfaces";
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
@@ -8,6 +8,7 @@ interface AppContextType {
     currentOffice: Office | undefined;
     setOffices: (offices: Office[]) => void;
     setCurrentOffice: (currentOffice: Office) => void;
+    deleteStaffMember: (staffMemberId: string) => void;
 }
 
 const AppContext = createContext<AppContextType>({} as AppContextType);
@@ -47,13 +48,19 @@ export const AppOfficeProvider = ({ children }: PropsWithChildren) => {
         setCurrentOffice(currentOffice);
     }
 
+    const deleteStaffMember = (staffMemberId: string) => {
+        const newStaffMembers = currentOffice?.staff.filter(member => member.id !== staffMemberId);
+        setCurrentOfficeMeth({...(currentOffice as Office), staff: newStaffMembers as Staff[]})
+    }
+
     return(
         <AppContext.Provider
             value={{
                 offices: officesList,
                 currentOffice,
                 setOffices,
-                setCurrentOffice: setCurrentOfficeMeth
+                setCurrentOffice: setCurrentOfficeMeth,
+                deleteStaffMember
             }}
         >
             {children}

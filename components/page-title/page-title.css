@@ -8,8 +8,5 @@
     width: calc(100% - 24px);
     text-align: center;
     font-size: 18px;
-}
-
-.page-title > svg {
-    cursor: pointer;
+    font-weight: 500;
 }

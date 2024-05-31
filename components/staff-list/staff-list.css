@@ -35,3 +35,40 @@
     position: absolute;
     right: 0;
 }
+
+.staff-list__modal {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 0 !important;
+}
+
+.staff-list__delete-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 0 !important;
+}
+
+.staff-list__delete-modal > div:first-of-type {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.staff-list__delete-modal > div:first-of-type > h4 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24.2px;
+}
+
+.staff-list__delete-modal > div:last-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.staff-list__delete-modal > div:last-of-type > button:first-child {
+    background-color: #F44336;
+}
