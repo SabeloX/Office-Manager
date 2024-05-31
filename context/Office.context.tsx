@@ -9,6 +9,7 @@ interface AppContextType {
     setOffices: (offices: Office[]) => void;
     setCurrentOffice: (currentOffice: Office) => void;
     deleteStaffMember: (staffMemberId: string) => void;
+    editStaffMember: (staffMember: Staff) => void;
 }
 
 const AppContext = createContext<AppContextType>({} as AppContextType);
@@ -53,6 +54,17 @@ export const AppOfficeProvider = ({ children }: PropsWithChildren) => {
         setCurrentOfficeMeth({...(currentOffice as Office), staff: newStaffMembers as Staff[]})
     }
 
+    const editStaffMember = (staffMember: Staff) => {
+        const newStaff = currentOffice?.staff.map(member => {
+            if(member.id === staffMember.id){
+                return staffMember;
+            }
+            return member;
+        });
+
+        setCurrentOfficeMeth({...(currentOffice as Office), staff: newStaff as Staff[]});
+    }
+
     return(
         <AppContext.Provider
             value={{
@@ -60,7 +72,8 @@ export const AppOfficeProvider = ({ children }: PropsWithChildren) => {
                 currentOffice,
                 setOffices,
                 setCurrentOffice: setCurrentOfficeMeth,
-                deleteStaffMember
+                deleteStaffMember,
+                editStaffMember
             }}
         >
             {children}

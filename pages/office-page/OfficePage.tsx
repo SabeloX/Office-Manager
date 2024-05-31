@@ -39,7 +39,7 @@ export const OfficePage = () => {
             <Search onSearch={handleSearch} />
             {staffResults && <StaffList setStaffList={setStaffResults} staffList={staffResults} />}
             <Addbutton onClick={() => setOpen(true)} />
-            <StaffInfoModal open={open} setOpen={setOpen} setStaffResults={setStaffResults} />
+            <StaffInfoModal open={open} onClose={() => setOpen(false)} setStaffResults={setStaffResults} />
         </div>
     );
 }

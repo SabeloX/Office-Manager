@@ -1,6 +1,6 @@
 import { useAppOffices } from "@/context/Office.context";
 import { Avatar, Office, Staff } from "@/interfaces";
-import { Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { Modal } from "../modal/Modal";
 import { ArrowLeftIcon } from "@/icons";
 import { CloseIcon } from "@/icons/CloseIcon";
@@ -12,27 +12,33 @@ import { avatars } from "@/data/avatars";
 
 interface Props {
     open: boolean;
-    setOpen: (open: boolean) => void;
+    onClose: () => void;
     setStaffResults: Dispatch<SetStateAction<Staff[] | undefined>>;
-    name?: string;
-    surname?: string;
-    avatarValue?: Avatar;
+    staffMember?: Staff;
+    edit?: boolean;
 }
 
 export const StaffInfoModal = ({
     open,
-    setOpen,
+    onClose,
     setStaffResults,
-    name = '',
-    surname = '',
-    avatarValue
+    staffMember,
+    edit
 }: Props) => {
-    const { currentOffice, setCurrentOffice } = useAppOffices();
+    const { currentOffice, setCurrentOffice, editStaffMember } = useAppOffices();
     const [step, setStep] = useState<number>(0);
 
-    const [firstName, setFirstName] = useState<string>(name);
-    const [lastName, setLastName] = useState<string>(surname);
-    const [selectedAvatar, setAvatar] = useState<Avatar | undefined>(avatarValue);
+    const [firstName, setFirstName] = useState<string>(staffMember?.firstName ?? '');
+    const [lastName, setLastName] = useState<string>(staffMember?.lastName ?? '');
+    const [selectedAvatar, setAvatar] = useState<Avatar | undefined>(staffMember?.avatar);
+
+    useEffect(() => {
+        if(staffMember){
+            setFirstName(staffMember.firstName);
+            setLastName(staffMember.lastName);
+            setAvatar(staffMember.avatar);
+        }
+    }, [staffMember])
 
     const handleAddStaffMember = (avatar: Avatar) => {
         const newOffice = currentOffice && {
@@ -54,7 +60,20 @@ export const StaffInfoModal = ({
         setStep(0);
 
         setStaffResults((newOffice as Office).staff);
-        setOpen(false);
+        onClose();
+        setStep(0);
+    }
+
+    const handleEditStaffMember = (avatar: Avatar) => {
+        if(staffMember){
+            editStaffMember({
+                id: staffMember.id,
+                lastName,
+                firstName,
+                avatar
+            });
+            onClose();
+        }
     }
     
     const StepComponents = (): ReactNode => {
@@ -75,7 +94,7 @@ export const StaffInfoModal = ({
                 return (
                     <StepTwo
                         step={step}
-                        addStaffMember={(avatar) => handleAddStaffMember(avatar)}
+                        addStaffMember={(avatar) => edit ? handleEditStaffMember(avatar) : handleAddStaffMember(avatar)}
                         setAvatar={setAvatar}
                         selectedAvatar={selectedAvatar}
                     />
@@ -84,11 +103,11 @@ export const StaffInfoModal = ({
     }
 
     return(
-        <Modal open={open} onClose={() => setOpen(false)}>
+        <Modal open={open} onClose={onClose}>
             <div>
                 {step === 1 && <ArrowLeftIcon onClick={() => setStep(0)} />}
                 <h3>New Staff Member</h3>
-                <CloseIcon onClick={() => setOpen(false)} />
+                <CloseIcon onClick={onClose} />
             </div>
             { StepComponents() }
         </Modal>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import './staff-list.css';
 import { ArrowLeftIcon, OptionsIcon } from "@/icons";
 import { Modal } from "../modal/Modal";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Button } from "../button/Button";
 import { useAppOffices } from "@/context/Office.context";
 import { StaffInfoModal } from "../staff-info-modal/StaffInfoModal";
@@ -19,8 +19,9 @@ export const StaffList = ({ staffList, setStaffList }: Props) => {
     const [openDelete, setOpenDelete] = useState<boolean>(false);
     const [selectedStaffMember, setSelectedStaffMember] = useState<string>();
     const [openEditStaffMember, setOpenEditStaffMember] = useState<boolean>(false);
+    const [selectedMemberForEdit, setSelectedMemberForEdit] = useState<Staff>();
 
-    const { deleteStaffMember } = useAppOffices();
+    const { deleteStaffMember, currentOffice } = useAppOffices();
 
     const handleSelectedStaffMember = (id: string) => {
         setSelectedStaffMember(id);
@@ -40,6 +41,20 @@ export const StaffList = ({ staffList, setStaffList }: Props) => {
     const handleDeleteStaffMember = () => {
         selectedStaffMember && deleteStaffMember(selectedStaffMember);
         setOpenDelete(false);
+    }
+
+    const handleEditStaffMember = () => {
+        const member = currentOffice?.staff.filter(member => member.id === selectedStaffMember)[0];
+
+        setTimeout(() => {
+            setSelectedMemberForEdit(member)
+            setOpenEditStaffMember(true);
+        }, 500);
+    }
+
+    const handleCloseEdit = () => {
+        setOpenEditStaffMember(false);
+        setOpenOptions(false);
     }
 
     return(
@@ -63,7 +78,7 @@ export const StaffList = ({ staffList, setStaffList }: Props) => {
         </div>
         <Modal open={openOptions} onClose={() => setOpenOptions(false)}>
             <div className="staff-list__modal">
-                <Button onClick={() => setOpenEditStaffMember(true)}>Edit Staff Member</Button>
+                <Button onClick={handleEditStaffMember}>Edit Staff Member</Button>
                 <Button text onClick={handleDeletePrompt}>Delete Staff Member</Button>
             </div>
         </Modal>
@@ -81,8 +96,10 @@ export const StaffList = ({ staffList, setStaffList }: Props) => {
         </Modal>
         <StaffInfoModal
             open={openEditStaffMember}
-            setOpen={setOpenEditStaffMember}
+            onClose={handleCloseEdit}
             setStaffResults={setStaffList}
+            staffMember={selectedMemberForEdit}
+            edit
         />
         </>
     )
