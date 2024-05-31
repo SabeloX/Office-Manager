@@ -30,17 +30,14 @@ export const OfficePage = () => {
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
 
-    useEffect(() => {
-        setCurrentOffice(cookies.currentOffice);
-        setStaffResults(cookies.currentOffice.staff)
-        setCookies('offices', [...offices, cookies.currentOffice]);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cookies.currentOffice]);
-
     const handleSearch = (results: string) => {
         const filteredStaff = currentOffice.staff.filter(staffMember => `${staffMember.firstName} ${staffMember.lastName}`.toLowerCase().includes(results));
         setStaffResults(filteredStaff);
     }
+
+    useEffect(() => {
+        console.log(cookies.offices)
+    }, [cookies.offices])
 
     const handleAddStaffMember = (avatar: Avatar) => {
         const newOffice = {
@@ -55,12 +52,21 @@ export const OfficePage = () => {
                 }
             ]
         }
-        console.log(newOffice);
+
         removeCookies('currentOffice');
         setCookies('currentOffice', newOffice);
         setFirstName('');
         setLastName('');
         setStep(0);
+
+        setCurrentOffice(newOffice);
+        setStaffResults(newOffice.staff)
+        setCookies('offices', offices.map(office => {
+            if(office.id === newOffice.id){
+                return newOffice;
+            }
+            return office;
+        }));
         setOpen(false);
     }
 
@@ -92,7 +98,7 @@ export const OfficePage = () => {
         <div className="office-page">
             <PageTitle title='Office' />
             {currentOffice && <OfficeBlock office={currentOffice} />}
-            <Search onSearch={handleSearch}/>
+            <Search onSearch={handleSearch} />
             <StaffList staffList={staffResults} />
             <Addbutton onClick={() => setOpen(true)} />
             <Modal open={open} onClose={() => setOpen(false)}>
