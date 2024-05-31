@@ -1,4 +1,4 @@
-import { AddOffice } from "@/pages/add-office/AddOffice";
+import { AddOffice } from "@/views/add-office/AddOffice";
 
 const AddOfficePage = () => (
     <AddOffice />
