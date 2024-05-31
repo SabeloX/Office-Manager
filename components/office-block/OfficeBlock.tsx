@@ -29,6 +29,11 @@ export const OfficeBlock = ({ office }: Props) => {
         push('/office');
     }
 
+    const handleEditOffice = () => {
+        setCurrentOffice(office);
+        push('/edit-office');
+    }
+
     return (
         <div
             className="office-block"
@@ -44,7 +49,7 @@ export const OfficeBlock = ({ office }: Props) => {
             ></span>
             <div className="office-block__info">
                 <h3 onClick={handleNavigate}>{ office.name }</h3>
-                <EditIcon className="office-block__edit" />
+                <EditIcon onClick={handleEditOffice} className="office-block__edit" />
                 <div>
                     <StaffIcon />
                     <p><span>{ office.totalStaff }</span> Staff Members in Office</p>

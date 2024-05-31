@@ -4,7 +4,7 @@ import './input-field.css';
 
 interface Props {
     placeholder?: string;
-    value?: string;
+    value?: string | number;
     onChange?: (value: string) => void;
     type?: 'text' | 'number';
 }
