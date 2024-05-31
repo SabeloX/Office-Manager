@@ -1,0 +1,27 @@
+.modal {
+    min-height: 100vh;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__bg {
+    background-color: #334155;
+    opacity: 0.5;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.modal__panel {
+    min-height: 164px;
+    position: relative;
+    width: 80%;
+    border-radius: 8px;
+    background-color: #F8FAFC;
+    opacity: 1;
+    z-index: 10;
+}
