@@ -2,7 +2,7 @@
     padding: 16px;
 }
 
-.add-office  > .page-title {
+.add-office .page-title {
     margin-bottom: 45px;
 }
 
@@ -23,7 +23,7 @@
     font-weight: 600;
 }
 
-.add-office > div:last-of-type {
+.add-office > div:first-of-type > div:last-of-type {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,4 +37,28 @@
 
 small {
     color: #F44336;
+}
+
+@media (min-width: 768px) {
+    .add-office{
+        padding: 36px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-office > div:nth-of-type(2) {
+        display: flex;
+        gap: 36px;
+        max-width: 1440px;
+        width: 100%;
+    }
+
+    .add-office > div:nth-of-type(2) > .add-office__info {
+        flex: 1;
+    }
+
+    .add-office > div:nth-of-type(2) > div:last-of-type {
+        flex: 1;
+    }
 }
