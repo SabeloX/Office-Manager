@@ -6,8 +6,9 @@ interface Props {
     placeholder?: string;
     value?: string;
     onChange?: (value: string) => void;
+    type?: 'text' | 'number';
 }
 
-export const InputField = ({ placeholder, value, onChange }: Props) => (
-    <input className="input-field" placeholder={placeholder} value={value} onChange={onChange ? (event: ChangeEvent<HTMLInputElement>) => onChange(event.target.value) : () => {}} />
+export const InputField = ({ placeholder, value, onChange, type }: Props) => (
+    <input type={type} className="input-field" placeholder={placeholder} value={value} onChange={onChange ? (event: ChangeEvent<HTMLInputElement>) => onChange(event.target.value) : () => {}} />
 );
