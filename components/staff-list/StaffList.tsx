@@ -8,6 +8,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Button } from "../button/Button";
 import { useAppOffices } from "@/context/Office.context";
 import { StaffInfoModal } from "../staff-info-modal/StaffInfoModal";
+import { DeleteModal } from "../delete-modal/DeleteModal";
 
 interface Props {
     staffList: Staff[];
@@ -82,18 +83,12 @@ export const StaffList = ({ staffList, setStaffList }: Props) => {
                 <Button text onClick={handleDeletePrompt}>Delete Staff Member</Button>
             </div>
         </Modal>
-        <Modal open={openDelete} onClose={() => setOpenDelete(false)}>
-            <div className="staff-list__delete-modal">
-                <div>
-                    <ArrowLeftIcon onClick={handleBack} />
-                    <h4>Are you sure you want to Delete Staff Member?</h4>
-                </div>
-                <div>
-                    <Button onClick={handleDeleteStaffMember}>delete staff member</Button>
-                    <Button text onClick={() => setOpenDelete(false)}>keep staff member</Button>
-                </div>
-            </div>
-        </Modal>
+        <DeleteModal
+            open={openDelete}
+            onClose={() => setOpenDelete(false)}
+            onDelete={handleDeleteStaffMember}
+            onBack={handleBack}
+        />
         <StaffInfoModal
             open={openEditStaffMember}
             onClose={handleCloseEdit}

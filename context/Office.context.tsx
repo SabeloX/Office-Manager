@@ -12,6 +12,7 @@ interface AppContextType {
     editStaffMember: (staffMember: Staff) => void;
     addNewOffice: (office: Office) => void;
     editOffice: (office: Office) => void;
+    deleteOffice: (officeId: string) => void;
 }
 
 const AppContext = createContext<AppContextType>({} as AppContextType);
@@ -82,6 +83,12 @@ export const AppOfficeProvider = ({ children }: PropsWithChildren) => {
         setOffices(updatedOffices);
     }
 
+    const deleteOffice = (officeId: string) => {
+        const updatedOffices = officesList.filter(office => office.id !== officeId);
+
+        setOffices(updatedOffices);
+    }
+
     return(
         <AppContext.Provider
             value={{
@@ -92,7 +99,8 @@ export const AppOfficeProvider = ({ children }: PropsWithChildren) => {
                 deleteStaffMember,
                 editStaffMember,
                 addNewOffice,
-                editOffice
+                editOffice,
+                deleteOffice
             }}
         >
             {children}

@@ -25,7 +25,10 @@
 
 .add-office > div:last-of-type {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    gap: 12px;
 }
 
 .add-office > div:last-of-type > button {
