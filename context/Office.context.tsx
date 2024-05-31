@@ -24,6 +24,10 @@ export const AppOfficeProvider = ({ children }: PropsWithChildren) => {
         else{
             setOfficesList(cookies.offices);
         }
+
+        if(cookies.currentOffice){
+            setCurrentOffice(cookies.currentOffice);
+        }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cookies.offices]);
 

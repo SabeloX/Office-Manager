@@ -9,7 +9,7 @@ import { Avatar, Office, Staff } from '@/interfaces';
 import { Search } from '@/components/search/Search';
 import { StaffList } from '@/components/staff-list/StaffList';
 import { Addbutton } from '@/components/add-button/AddButton';
-import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 import { Modal } from '@/components/modal/Modal';
 import { CloseIcon } from '@/icons/CloseIcon';
 import { InputField } from '@/components/input-field/InputField';
@@ -22,18 +22,22 @@ import { useAppOffices } from '@/context/Office.context';
 
 export const OfficePage = () => {
     const { setCurrentOffice, currentOffice } = useAppOffices();
-    const [staffResults, setStaffResults] = useState<Staff[]>(currentOffice?.staff ?? []);
+    const [staffResults, setStaffResults] = useState<Staff[]>();
     const [open, setOpen] = useState<boolean>(false);
     const [step, setStep] = useState<number>(0);
 
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
 
+    useEffect(() => {
+        setStaffResults(currentOffice?.staff);
+    },[currentOffice]);
+
     const handleSearch = (results: string) => {
         const filteredStaff = currentOffice?.staff.filter(staffMember => 
             `${staffMember.firstName} ${staffMember.lastName}`.toLowerCase().includes(results)
-        ) ?? [];
-        setStaffResults(filteredStaff);
+        );
+        setStaffResults(filteredStaff as Staff[]);
     }
 
     const handleAddStaffMember = (avatar: Avatar) => {
@@ -88,7 +92,7 @@ export const OfficePage = () => {
             <PageTitle title='Office' />
             {currentOffice && <OfficeBlock office={currentOffice} />}
             <Search onSearch={handleSearch} />
-            <StaffList staffList={staffResults} />
+            {staffResults && <StaffList staffList={staffResults} />}
             <Addbutton onClick={() => setOpen(true)} />
             <Modal open={open} onClose={() => setOpen(false)}>
                 <div>
