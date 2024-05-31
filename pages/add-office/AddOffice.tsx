@@ -110,6 +110,7 @@ export const AddOffice = ({ currentOffice, edit }: Props) => {
             </div>
             <div>
                 <Button onClick={handleAddOffice}>{edit ? 'Update Office' : 'Add Office'}</Button>
+                {edit && <Button text>Delete Office</Button>}
             </div>
         </div>
     )

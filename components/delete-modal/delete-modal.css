@@ -1,0 +1,29 @@
+.delete-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 0 !important;
+}
+
+.delete-modal > div:first-of-type {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.delete-modal > div:first-of-type > h4 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24.2px;
+}
+
+.delete-modal > div:last-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.delete-modal > div:last-of-type > button:first-child {
+    background-color: #F44336;
+}
