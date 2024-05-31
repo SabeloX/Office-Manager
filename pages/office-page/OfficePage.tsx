@@ -20,7 +20,6 @@ import Image from 'next/image';
 
 import { useAppOffices } from '@/context/Office.context';
 import { ArrowLeftIcon } from '@/icons';
-import { useRouter } from 'next/navigation';
 
 export const OfficePage = () => {
     const { setCurrentOffice, currentOffice } = useAppOffices();
