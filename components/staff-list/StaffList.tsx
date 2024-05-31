@@ -4,18 +4,21 @@ import Image from "next/image";
 import './staff-list.css';
 import { ArrowLeftIcon, OptionsIcon } from "@/icons";
 import { Modal } from "../modal/Modal";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "../button/Button";
 import { useAppOffices } from "@/context/Office.context";
+import { StaffInfoModal } from "../staff-info-modal/StaffInfoModal";
 
 interface Props {
     staffList: Staff[];
+    setStaffList: Dispatch<SetStateAction<Staff[] | undefined>>;
 }
 
-export const StaffList = ({ staffList }: Props) => {
+export const StaffList = ({ staffList, setStaffList }: Props) => {
     const [openOptions, setOpenOptions] = useState<boolean>(false);
     const [openDelete, setOpenDelete] = useState<boolean>(false);
     const [selectedStaffMember, setSelectedStaffMember] = useState<string>();
+    const [openEditStaffMember, setOpenEditStaffMember] = useState<boolean>(false);
 
     const { deleteStaffMember } = useAppOffices();
 
@@ -60,7 +63,7 @@ export const StaffList = ({ staffList }: Props) => {
         </div>
         <Modal open={openOptions} onClose={() => setOpenOptions(false)}>
             <div className="staff-list__modal">
-                <Button>Edit Staff Member</Button>
+                <Button onClick={() => setOpenEditStaffMember(true)}>Edit Staff Member</Button>
                 <Button text onClick={handleDeletePrompt}>Delete Staff Member</Button>
             </div>
         </Modal>
@@ -76,6 +79,11 @@ export const StaffList = ({ staffList }: Props) => {
                 </div>
             </div>
         </Modal>
+        <StaffInfoModal
+            open={openEditStaffMember}
+            setOpen={setOpenEditStaffMember}
+            setStaffResults={setStaffList}
+        />
         </>
     )
 }
