@@ -30,8 +30,6 @@ export const OfficePage = () => {
         setStaffResults(filteredStaff as Staff[]);
     }
 
-    
-
     return (
         <div className="office-page">
             <PageTitle title='Office' />
