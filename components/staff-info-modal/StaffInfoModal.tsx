@@ -106,7 +106,7 @@ export const StaffInfoModal = ({
         <Modal open={open} onClose={onClose}>
             <div>
                 {step === 1 && <ArrowLeftIcon onClick={() => setStep(0)} />}
-                <h3>New Staff Member</h3>
+                <h3>{edit ? 'Edit Staff Member' : 'New Staff Member'}</h3>
                 <CloseIcon onClick={onClose} />
             </div>
             { StepComponents() }

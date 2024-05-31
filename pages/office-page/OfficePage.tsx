@@ -30,11 +30,9 @@ export const OfficePage = () => {
         setStaffResults(filteredStaff as Staff[]);
     }
 
-    
-
     return (
         <div className="office-page">
-            <PageTitle title='Office' />
+            <PageTitle backLink="/" title='Office' />
             {currentOffice && <OfficeBlock office={currentOffice} />}
             <Search onSearch={handleSearch} />
             {staffResults && <StaffList setStaffList={setStaffResults} staffList={staffResults} />}
