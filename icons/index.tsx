@@ -7,3 +7,4 @@ export * from './OptionsIcon';
 export * from './PlusIcon';
 export * from './PhoneIcon';
 export * from './SearchIcon';
+export * from './StaffIcon';

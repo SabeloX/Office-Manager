@@ -66,19 +66,19 @@ const OfficeBlockDetails = ({ details }: OfficeDetailsProps ) => (
     <ul className="office-block__details">
         <li>
             <PhoneIcon />
-            <p>{details.contactNumber}</p>
+            <p>{details?.contactNumber}</p>
         </li>
         <li>
             <EmailIcon />
-            <p>{details.email}</p>
+            <p>{details?.email}</p>
         </li>
         <li>
             <CapacityIcon />
-            <p>Office Capacity: {details.capacity}</p>
+            <p>Office Capacity: {details?.capacity}</p>
         </li>
         <li>
             <AddressIcon />
-            <p>{details.address}</p>
+            <p>{details?.address}</p>
         </li>
     </ul>
 );

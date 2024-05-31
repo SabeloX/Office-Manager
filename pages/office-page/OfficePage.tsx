@@ -10,7 +10,7 @@ import { Avatar, Office, Staff } from '@/interfaces';
 import { Search } from '@/components/search/Search';
 import { StaffList } from '@/components/staff-list/StaffList';
 import { Addbutton } from '@/components/add-button/AddButton';
-import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 import { Modal } from '@/components/modal/Modal';
 import { CloseIcon } from '@/icons/CloseIcon';
 import { InputField } from '@/components/input-field/InputField';
@@ -18,37 +18,80 @@ import { Button } from '@/components/button/Button';
 import { Steps } from '@/components/steps/Steps';
 import { avatars } from '@/data/avatars';
 import Image from 'next/image';
+import { offices } from '@/data/offices';
 
 export const OfficePage = () => {
-    const [cookies] = useCookies<'currentOffice', { currentOffice: Office }>(['currentOffice']);
-    const [staffResults, setStaffResults] = useState<Staff[]>(cookies.currentOffice.staff);
+    const [cookies, setCookies, removeCookies] = useCookies(['currentOffice', 'offices']);
+    const [currentOffice, setCurrentOffice] = useState<Office>(cookies.currentOffice);
+    const [staffResults, setStaffResults] = useState<Staff[]>(cookies.currentOffice?.staff ?? []);
     const [open, setOpen] = useState<boolean>(false);
     const [step, setStep] = useState<number>(0);
 
+    const [firstName, setFirstName] = useState<string>('');
+    const [lastName, setLastName] = useState<string>('');
+
+    useEffect(() => {
+        setCurrentOffice(cookies.currentOffice);
+        setStaffResults(cookies.currentOffice.staff)
+        setCookies('offices', [...offices, cookies.currentOffice]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cookies.currentOffice]);
 
     const handleSearch = (results: string) => {
-        const filteredStaff = cookies.currentOffice.staff.filter(staffMember => `${staffMember.firstName} ${staffMember.lastName}`.toLowerCase().includes(results));
+        const filteredStaff = currentOffice.staff.filter(staffMember => `${staffMember.firstName} ${staffMember.lastName}`.toLowerCase().includes(results));
         setStaffResults(filteredStaff);
     }
 
     const handleAddStaffMember = (avatar: Avatar) => {
-
+        const newOffice = {
+            ...cookies.currentOffice,
+            staff: [
+                ...cookies.currentOffice.staff,
+                {
+                    firstName,
+                    lastName,
+                    avatar,
+                    id: `${cookies.currentOffice.staff.length + 1}`
+                }
+            ]
+        }
+        console.log(newOffice);
+        removeCookies('currentOffice');
+        setCookies('currentOffice', newOffice);
+        setFirstName('');
+        setLastName('');
+        setStep(0);
+        setOpen(false);
     }
 
     const Steps = (): ReactNode => {
         switch(step){
             default:
             case 0:
-                return <StepOne step={step} setStep={setStep} />;
+                return (
+                    <StepOne
+                        step={step}
+                        setStep={setStep}
+                        firstName={firstName}
+                        setFirstName={setFirstName}
+                        lastName={lastName}
+                        setLastName={setLastName}
+                    />
+                );
             case 1:
-                return <StepTwo step={step} addStaffMember={(avatar) => handleAddStaffMember(avatar)} />;
+                return (
+                    <StepTwo
+                        step={step}
+                        addStaffMember={(avatar) => handleAddStaffMember(avatar)}
+                    />
+                );
         }
     }
 
     return (
         <div className="office-page">
             <PageTitle title='Office' />
-            <OfficeBlock office={cookies.currentOffice} />
+            {currentOffice && <OfficeBlock office={currentOffice} />}
             <Search onSearch={handleSearch}/>
             <StaffList staffList={staffResults} />
             <Addbutton onClick={() => setOpen(true)} />
@@ -66,11 +109,13 @@ export const OfficePage = () => {
 interface StepOneProps {
     step: number;
     setStep: Dispatch<SetStateAction<number>>;
+    firstName: string;
+    lastName: string;
+    setFirstName: (firstName: string) => void;
+    setLastName: (lastName: string) => void;
 }
 
-const StepOne = ({ step, setStep }: StepOneProps) => {
-    const [firstName, setFirstName] = useState<string>('');
-    const [lastName, setLastName] = useState<string>('');
+const StepOne = ({ step, setStep, firstName, lastName, setFirstName, setLastName }: StepOneProps) => {
     const [validationError, setValidationError] = useState<boolean>(false);
 
     const handleNextStep = () => {
@@ -116,6 +161,7 @@ const StepTwo = ({ step, addStaffMember }: StepTwoProps) => {
     const handleAddAvatar = () => {
         if(selectedAvatar){
             addStaffMember(selectedAvatar);
+            setAvatar(undefined);
         }
         else{
             setValidationError(true);
