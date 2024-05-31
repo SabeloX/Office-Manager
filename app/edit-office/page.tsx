@@ -1,4 +1,4 @@
-import { EditOffice } from "@/pages/edit-office/EditOffice";
+import { EditOffice } from "@/views/edit-office/EditOffice";
 
 const EditOfficePage = () => (
     <EditOffice />

@@ -1,3 +1,5 @@
+'use client';
+
 import { Addbutton } from "@/components/add-button/AddButton";
 import { OfficeBlock } from "../../components/office-block/OfficeBlock";
 

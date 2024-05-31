@@ -1,4 +1,4 @@
-import { OfficePage } from "@/pages/office-page/OfficePage"
+import { OfficePage } from "@/views/office-page/OfficePage"
 
 const Office = () => (
     <OfficePage />
