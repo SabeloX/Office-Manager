@@ -106,21 +106,25 @@ export const AddOffice = ({ currentOffice, edit }: Props) => {
         <>
         <div className="add-office">
             <PageTitle title="New Office" />
-            <div className="add-office__info">
-                <InputField value={officeName} onChange={(value) => setOfficeName(value)} placeholder="Office Name" />
-                <InputField value={physicalAddress} onChange={(value) => setPhysicalAddress(value)} placeholder="Physical Address" />
-                <InputField value={emailAddress} onChange={(value) => setEmailAddress(value)} placeholder="Email Address" />
-                <InputField value={phoneNumber} onChange={(value) => setPhoneNumber(value)} placeholder="Phone Number" />
-                <InputField value={maxCapacity} type='number' onChange={(value) => setMaxCapacity(parseInt(value))} placeholder="Maximum Capacity " />
-            </div>
-            <div className="add-office__choose-color">
-                <h3>Office Colour</h3>
-                <ChooseColor setColor={setOfficeColor} selectedColor={officeColor} />
-                {validationError && <small>Please fill in all fields and select a color for your office.</small>}
-            </div>
             <div>
-                <Button onClick={handleAddOffice}>{edit ? 'Update Office' : 'Add Office'}</Button>
-                {edit && <Button text onClick={() => setOpenDeleteOffice(true)}>Delete Office</Button>}
+                <div className="add-office__info">
+                    <InputField value={officeName} onChange={(value) => setOfficeName(value)} placeholder="Office Name" />
+                    <InputField value={physicalAddress} onChange={(value) => setPhysicalAddress(value)} placeholder="Physical Address" />
+                    <InputField value={emailAddress} onChange={(value) => setEmailAddress(value)} placeholder="Email Address" />
+                    <InputField value={phoneNumber} onChange={(value) => setPhoneNumber(value)} placeholder="Phone Number" />
+                    <InputField value={maxCapacity} type='number' onChange={(value) => setMaxCapacity(parseInt(value))} placeholder="Maximum Capacity " />
+                </div>
+                <div>
+                    <div className="add-office__choose-color">
+                        <h3>Office Colour</h3>
+                        <ChooseColor setColor={setOfficeColor} selectedColor={officeColor} />
+                        {validationError && <small>Please fill in all fields and select a color for your office.</small>}
+                    </div>
+                    <div>
+                        <Button onClick={handleAddOffice}>{edit ? 'Update Office' : 'Add Office'}</Button>
+                        {edit && <Button text onClick={() => setOpenDeleteOffice(true)}>Delete Office</Button>}
+                    </div>
+                </div>
             </div>
         </div>
         <DeleteModal office onDelete={handleDeleteOffice} open={openDeleteOffice} onClose={() => setOpenDeleteOffice(false)} />

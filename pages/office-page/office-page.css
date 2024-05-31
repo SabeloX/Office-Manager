@@ -84,18 +84,13 @@ small {
 
 @media (min-width: 768px) {
     .office-page {
-        max-width: 1390px;
         padding: 36px;
+        align-items: center;
     }
 
     .office-block {
         margin-top: 0 !important;
         flex: 1;
-    }
-
-    .office-page > .page-title > p {
-        text-align: left;
-        margin-left: 16px;
     }
 
     .office-page .search {
@@ -106,6 +101,8 @@ small {
         display: flex;
         justify-content: space-between;
         gap: 36px;
+        max-width: 1390px;
+        width: 100%;
     }
 
     .office-page > div:nth-of-type(2) > div:nth-of-type(2) {
