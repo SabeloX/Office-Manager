@@ -9,18 +9,19 @@ interface DeletModalProps {
     onClose: () => void;
     onBack?: () => void;
     onDelete: () => void;
+    office?: boolean;
 }
 
-export const DeleteModal = ({ open, onClose, onBack, onDelete }: DeletModalProps) => (
+export const DeleteModal = ({ open, onClose, onBack, onDelete, office }: DeletModalProps) => (
     <Modal open={open} onClose={onClose}>
         <div className="delete-modal">
             <div>
                 {onBack && <ArrowLeftIcon onClick={onBack} />}
-                <h4>Are you sure you want to Delete Staff Member?</h4>
+                <h4>{`Are you sure you want to Delete ${office ? 'Office' :'Staff Member?'}`}</h4>
             </div>
             <div>
-                <Button onClick={onDelete}>delete staff member</Button>
-                <Button text onClick={onClose}>keep staff member</Button>
+                <Button onClick={onDelete}>{`delete ${office ? 'office' : 'staff member'}`}</Button>
+                <Button text onClick={onClose}>{`keep ${office ? 'office' : 'staff member'}`}</Button>
             </div>
         </div>
     </Modal>

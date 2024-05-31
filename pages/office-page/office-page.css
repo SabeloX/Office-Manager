@@ -16,10 +16,6 @@
     right: 17px;
 }
 
-.office-page > .modal > .modal__panel {
-    padding: 24px 16px;
-}
-
 .office-page > .modal > .modal__panel > div:first-of-type {
     display: flex;
     align-items: center;

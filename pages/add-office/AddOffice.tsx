@@ -123,7 +123,7 @@ export const AddOffice = ({ currentOffice, edit }: Props) => {
                 {edit && <Button text onClick={() => setOpenDeleteOffice(true)}>Delete Office</Button>}
             </div>
         </div>
-        <DeleteModal onDelete={handleDeleteOffice} open={openDeleteOffice} onClose={() => setOpenDeleteOffice(false)}/>
+        <DeleteModal office onDelete={handleDeleteOffice} open={openDeleteOffice} onClose={() => setOpenDeleteOffice(false)} />
         </>
     )
 }

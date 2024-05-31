@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 32px;
     margin-bottom: 0 !important;
+    padding: 24px 16px;
 }
 
 .delete-modal > div:first-of-type {
