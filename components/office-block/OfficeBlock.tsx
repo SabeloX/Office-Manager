@@ -12,6 +12,7 @@ import { useState } from "react";
 import { Office } from "@/interfaces/office.interface";
 import { useRouter } from "next/navigation";
 import { useCookies } from "react-cookie";
+import { useAppOffices } from "@/context/Office.context";
 
 interface Props {
     office: Office;
@@ -19,12 +20,12 @@ interface Props {
 
 export const OfficeBlock = ({ office }: Props) => {
     const [viewMore, setViewMore] = useState<boolean>(false);
-    const [_, setCookies] = useCookies<'currentOffice', { currentOffice: Office }>(['currentOffice']);
+    const { setCurrentOffice } = useAppOffices();
 
     const { push } = useRouter();
 
     const handleNavigate = () => {
-        setCookies('currentOffice', office)
+        setCurrentOffice(office);
         push('/office');
     }
 

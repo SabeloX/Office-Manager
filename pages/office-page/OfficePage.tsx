@@ -5,12 +5,11 @@ import { PageTitle } from '@/components/page-title/PageTitle';
 import './office-page.css';
 
 import { OfficeBlock } from '@/components/office-block/OfficeBlock';
-import { useCookies } from 'react-cookie';
 import { Avatar, Office, Staff } from '@/interfaces';
 import { Search } from '@/components/search/Search';
 import { StaffList } from '@/components/staff-list/StaffList';
 import { Addbutton } from '@/components/add-button/AddButton';
-import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 import { Modal } from '@/components/modal/Modal';
 import { CloseIcon } from '@/icons/CloseIcon';
 import { InputField } from '@/components/input-field/InputField';
@@ -18,12 +17,12 @@ import { Button } from '@/components/button/Button';
 import { Steps } from '@/components/steps/Steps';
 import { avatars } from '@/data/avatars';
 import Image from 'next/image';
-import { offices } from '@/data/offices';
+
+import { useAppOffices } from '@/context/Office.context';
 
 export const OfficePage = () => {
-    const [cookies, setCookies, removeCookies] = useCookies(['currentOffice', 'offices']);
-    const [currentOffice, setCurrentOffice] = useState<Office>(cookies.currentOffice);
-    const [staffResults, setStaffResults] = useState<Staff[]>(cookies.currentOffice?.staff ?? []);
+    const { setCurrentOffice, currentOffice } = useAppOffices();
+    const [staffResults, setStaffResults] = useState<Staff[]>(currentOffice?.staff ?? []);
     const [open, setOpen] = useState<boolean>(false);
     const [step, setStep] = useState<number>(0);
 
@@ -31,42 +30,32 @@ export const OfficePage = () => {
     const [lastName, setLastName] = useState<string>('');
 
     const handleSearch = (results: string) => {
-        const filteredStaff = currentOffice.staff.filter(staffMember => `${staffMember.firstName} ${staffMember.lastName}`.toLowerCase().includes(results));
+        const filteredStaff = currentOffice?.staff.filter(staffMember => 
+            `${staffMember.firstName} ${staffMember.lastName}`.toLowerCase().includes(results)
+        ) ?? [];
         setStaffResults(filteredStaff);
     }
 
-    useEffect(() => {
-        console.log(cookies.offices)
-    }, [cookies.offices])
-
     const handleAddStaffMember = (avatar: Avatar) => {
-        const newOffice = {
-            ...cookies.currentOffice,
+        const newOffice = currentOffice && {
+            ...currentOffice,
             staff: [
-                ...cookies.currentOffice.staff,
+                ...currentOffice.staff,
                 {
                     firstName,
                     lastName,
                     avatar,
-                    id: `${cookies.currentOffice.staff.length + 1}`
+                    id: `${currentOffice.staff.length + 1}`
                 }
             ]
         }
 
-        removeCookies('currentOffice');
-        setCookies('currentOffice', newOffice);
+        setCurrentOffice(newOffice as Office);
         setFirstName('');
         setLastName('');
         setStep(0);
 
-        setCurrentOffice(newOffice);
-        setStaffResults(newOffice.staff)
-        setCookies('offices', offices.map(office => {
-            if(office.id === newOffice.id){
-                return newOffice;
-            }
-            return office;
-        }));
+        setStaffResults((newOffice as Office).staff);
         setOpen(false);
     }
 

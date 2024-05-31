@@ -3,25 +3,26 @@ import { OfficeBlock } from "../../components/office-block/OfficeBlock";
 import { Office } from "../../interfaces/office.interface";
 
 import './landing-page.css';
+import { useAppOffices } from "@/context/Office.context";
 
-interface Props {
-    offices: Office[];
+export const LandingPage = () => {
+    const { offices } = useAppOffices();
+
+    return(
+        <div className="office">
+            <h2>All Offices</h2>
+            <ul>
+                {
+                    offices.map((office) => (
+                        <li key={office.id + office.name}>
+                            <OfficeBlock
+                                office={office}
+                            />
+                        </li>
+                    ))
+                }
+            </ul>
+            <Addbutton />
+        </div>
+    );
 }
-
-export const LandingPage = ({ offices }: Props) => (
-    <div className="office">
-        <h2>All Offices</h2>
-        <ul>
-            {
-                offices.map((office) => (
-                    <li key={office.id + office.name}>
-                        <OfficeBlock
-                            office={office}
-                        />
-                    </li>
-                ))
-            }
-        </ul>
-        <Addbutton />
-    </div>
-);
